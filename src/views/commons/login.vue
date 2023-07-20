@@ -12,14 +12,19 @@
             <el-form-item prop="username">
               <el-input v-model="form.username" clearable placeholder="请输入账号" maxlength="20">
                 <template #prefix>
-                  <el-icon color="#CBB1FC"><User /></el-icon>
+                  <el-icon color="#CBB1FC">
+                    <User />
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
             <el-form-item prop="password">
-              <el-input v-model="form.password" type="password" show-password clearable placeholder="请输入登陆密码" maxlength="20">
+              <el-input v-model="form.password" type="password" show-password clearable placeholder="请输入登陆密码"
+                maxlength="20">
                 <template #prefix>
-                  <el-icon color="#CBB1FC"><Lock /></el-icon>
+                  <el-icon color="#CBB1FC">
+                    <Lock />
+                  </el-icon>
                 </template>
               </el-input>
             </el-form-item>
@@ -34,40 +39,41 @@
 </template>
   
 <script setup lang='ts'>
-import { reactive, ref, getCurrentInstance } from "vue";
-import { FormInstance } from 'element-plus'
-import { login } from '@/api/common'
+import { reactive, ref } from "vue";
+import { FormInstance } from 'element-plus';
+import { login } from '@/api/common';
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
 
-  const form = reactive({
-    username: 'admin',
-    password: '123456'
+const form = reactive({
+  username: 'admin',
+  password: '123456'
+})
+
+const rules = reactive({
+  username: [
+    { required: true, message: '请输入账号' }
+  ],
+  password: [
+    { required: true, message: '请输入登陆密码' }
+  ]
+})
+
+const refForm = ref<FormInstance>();
+const store = useStore();
+const router = useRouter()
+const handleLogin = async () => {
+  await refForm.value?.validate(async (valid: boolean) => {
+    if (valid) {
+      await login(form).then((res: Res) => {
+        if (res.code === 200) {
+          store.dispatch('storeInfo', res.data)
+          router?.push('/index')
+        }
+      })
+    }
   })
-
-  const rules = reactive({
-    username: [
-      { required: true, message: '请输入账号' }
-    ],
-    password: [
-      { required: true, message: '请输入登陆密码' }
-    ]
-  })
-
-
-  const refForm = ref<FormInstance>();
-  const store = useStore();
-  console.log(store);
-  const handleLogin = async () => {
-    await refForm.value?.validate(async (valid : boolean) => {
-      if(valid) {
-        await login(form).then((res : Res) => {
-          if(res.code === 200) {
-            store.dispatch('storeInfo', res.data)
-          }
-        })
-      }
-    })
-  }
+}
 </script>
   
 <style lang="scss" scoped>
@@ -116,7 +122,7 @@ import { useStore } from "vuex";
       width: 600px;
       padding: 60px 30px;
       box-sizing: border-box;
-      
+
     }
   }
 
@@ -148,13 +154,13 @@ import { useStore } from "vuex";
       vertical-align: top;
     }
 
-    
+
     .el-form {
       width: 350px;
       margin-top: 60px;
     }
 
-    &::v-deep .el-input__wrapper {
+    &:deep(.el-input__wrapper) {
       border-radius: 20px;
       background-color: rgba($color: #ECDEFF, $alpha: .3);
       box-shadow: unset;
@@ -174,5 +180,4 @@ import { useStore } from "vuex";
       margin-top: 40px;
     }
   }
-}
-</style>
+}</style>

@@ -1,14 +1,35 @@
-import { defineConfig } from 'vite'
+import { defineConfig, loadEnv, ConfigEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import path from 'path'
 
 // https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [vue()],
-  css: {
-    preprocessorOptions: {
-      scss: {
-        additionalData: `@use '@/assets/css/index.scss' as *;`
+export default defineConfig((mode: ConfigEnv) => {
+  const env = loadEnv(mode.mode, process.cwd())
+  return {
+    plugins: [
+      vue()],
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, './src')
       }
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // additionalData: `@use '@/assets/css/element/index.scss' as *;`
+        }
+      }
+    },
+    server: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:9090',
+          changeOrigin: true,
+          rewrite: (path) => path.replace('/api', '')
+        }
+      },
+      port: env.VITE_PORT as unknown as number,
+      host: env.VITE_HOST
     }
   }
 })
