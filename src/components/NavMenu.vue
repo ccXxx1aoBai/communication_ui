@@ -1,7 +1,7 @@
 <template>
   <div>
-    <el-menu router :default-active="active" active-text-color="#A473E5">
-      <nav-menu-child v-for="(menu, index) in data" :key="index" :data="menu"></nav-menu-child>
+    <el-menu router :default-active="active" active-text-color="#A473E5" text-color="#cccccc">
+      <nav-menu-child v-for="(menu, index) in data" :key="index" :data="menu" :active="active"></nav-menu-child>
     </el-menu>
   </div>
 </template>
@@ -16,12 +16,12 @@ const store = useStore()
 const data = reactive(store.getters.routes)
 
 
-
-const isCollapse = ref(false)
 const route = useRoute();
 let active = ref(route.fullPath)
 watch(route, (val, oldVal) => {
   console.log(1, val, 2, oldVal);
+  active = ref(val.fullPath)
+  console.log(val.fullPath);
 })
 </script>
 

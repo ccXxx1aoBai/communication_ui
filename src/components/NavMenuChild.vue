@@ -7,11 +7,11 @@
         </i>
         <span>{{ data.label }}</span>
       </template>
-      <nav-menu-child v-for="child in data.children" :key="child.id" :data="child"></nav-menu-child>
+      <nav-menu-child v-for="child in data.children" :key="child.id" :data="child" :active="cur"></nav-menu-child>
     </el-sub-menu>
     <el-menu-item v-else :index="data.path">
       <i class="el-icon" v-if="data.icon">
-        <component :is="data.icon"></component>
+        <component :is="data.icon" ></component>
       </i>
       <!-- <span>{{ data.label }}</span> -->
     </el-menu-item>
@@ -19,11 +19,16 @@
 </template>
   
 <script setup lang='ts'>
-const { data } = withDefaults(defineProps<{
-  data: Menus
+import { computed } from 'vue';
+const { data, active } = withDefaults(defineProps<{
+  data: Menus,
+  active: string | number
 }>(), {
   data: () => {
     return {} as Menus
-  }
+  },
+  active: ''
 })
+const cur = computed(() => active)
+console.log('xxx', active);
 </script>

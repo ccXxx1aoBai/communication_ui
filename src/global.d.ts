@@ -7,7 +7,6 @@ declare global {
     msg?: string
   }
   
-  
   interface Menus {
     id: number | string,
     label: string,
