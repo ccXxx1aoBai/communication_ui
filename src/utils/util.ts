@@ -1,3 +1,10 @@
+import { defineComponent } from 'vue';
+
+/**
+ * 格式化路由
+ * @param memus 路由数据
+ * @returns 
+ */
 export const getRoutes = (memus : []) : Menus[] => {
   const data : Menus[] = []
   const modules = import.meta.glob(`@/**/*.vue`);
@@ -9,6 +16,9 @@ export const getRoutes = (memus : []) : Menus[] => {
       name: item.name,
       path: item.path || item.name,
       component: component,
+      meta: {
+        title: item.label
+      },
       icon: item.icon,
       parent: item.parent,
       sort: item.sort,

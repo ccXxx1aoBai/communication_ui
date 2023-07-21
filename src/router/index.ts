@@ -37,8 +37,7 @@ router.beforeEach(async (to, from, next) => {
             list.forEach((route : any) => {
               router.addRoute('layout', route);
             })
-            console.log(router.getRoutes());
-            console.log(router.getRoutes().length);
+            // next({ replace: true, ...list[0] });
           }
         })
         next({ replace: true, ...to });

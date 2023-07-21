@@ -13,7 +13,7 @@
       <i class="el-icon" v-if="data.icon">
         <component :is="data.icon" ></component>
       </i>
-      <!-- <span>{{ data.label }}</span> -->
+      <span>{{ data.label }}</span>
     </el-menu-item>
   </div>
 </template>

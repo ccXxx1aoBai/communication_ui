@@ -5,6 +5,7 @@ import store from './store'
 import '@/assets/css/index.scss'
 import "nprogress/nprogress.css";
 import ElementPlus from 'element-plus'
+import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 // import 'element-plus/dist/index.css'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import * as Icon from '@/components/svg'
@@ -21,5 +22,7 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app
   .use(store)
   .use(router)
-  .use(ElementPlus)
+  .use(ElementPlus, {
+    locale: zhCn
+  })
   .mount('#app');

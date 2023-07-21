@@ -10,12 +10,15 @@ declare global {
   interface Menus {
     id: number | string,
     label: string,
-    name: string,
-    component: Promise,
+    name?: string,
+    component?: Promise,
     path?: string | null,
     icon?: string | null,
     parent?: number | string,
     children?: Menus[] | null,
-    sort: number
+    sort: number,
+    meta?: {
+      title?: string
+    }
   }
 }
