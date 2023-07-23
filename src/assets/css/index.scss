@@ -12,7 +12,7 @@ $--colors: (
   ),
   "error": ("base": #db2828,
   ),
-  "info": ("base": #A473E5,
+  "info": ("base": #909399,
   ),
 );
 
@@ -92,7 +92,8 @@ ul {
     background-color: transparent !important;
   }
 }
-.delete {
+
+.delete, .danger {
   color: var(--el-color-danger) !important;
 
   &:focus {

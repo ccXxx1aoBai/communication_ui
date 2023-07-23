@@ -61,16 +61,16 @@
           <el-input v-model="form.component" placeholder="组件路径"></el-input>
         </el-form-item>
         <el-form-item prop="icon" label="图标" class="icon-form">
-          <el-input v-model="form.icon" placeholder="图标" @focus="trigger = true" @blur="onBlur()">
+          <el-input v-model="form.icon" placeholder="图标" clearable @focus="onFocus" @change="onChange" @blur="onBlur()">
             <template #prefix>
-              <el-icon v-if="form.icon">
-                <component :is="form.icon" />
+              <el-icon>
+                <component :is="curIcon ? curIcon : 'Home'" />
               </el-icon>
             </template>
           </el-input>
           <div class="icon-panel" :class="{ trigger: trigger }">
             <el-icon v-for="icon in icons" :key="icon" @click="selectIcon(icon); trigger = false">
-              <component :is="icon" :color="icon == form.icon ? '#A473E5' : '#666666'" />
+              <component :is="icon" :color="icon == form.icon ? '#A473E5' : 'currentColor'" />
             </el-icon>
           </div>
         </el-form-item>
@@ -84,18 +84,17 @@
         </el-form-item>
       </el-form>
       <template #footer>
-        <el-button type="primary">提交</el-button>
+        <el-button type="primary" @click="handleSubmit()">提交</el-button>
       </template>
     </el-dialog>
   </div>
 </template>
   
 <script setup lang='ts'>
-import { reactive, onMounted, ref, nextTick } from "vue";
-import { getMenu } from '@/api/menu'
+import { reactive, onMounted, ref, nextTick, onBeforeUnmount } from "vue";
+import { getMenu, addMenu, updateMenu, removeMenu } from '@/api/menu'
 import { total, size, current, siftName, dialog, changePageSize, icons, beforeClose } from '@/mixins'
-import { } from '@/utils/util'
-import { FormInstance } from 'element-plus';
+import { ElMessageBox, FormInstance } from 'element-plus';
 
 onMounted(() => {
   getDataList()
@@ -131,21 +130,33 @@ const rules = reactive({
   ]
 })
 const refForm = ref<FormInstance>()
-console.log(111, refForm);
+
+let curIcon = ref('Home')
 const selectIcon = (icon: string) => {
+  console.log(2, icon);
   form.icon = icon
+  curIcon.value = icon
 }
 
 let trigger = ref<boolean>(false)
-const onBlur = () => {
-  setTimeout(() => {
-    trigger = ref<boolean>(false)
-  }, 50);
+const onFocus = () => {
+  trigger.value = true
 }
+let timer = null as any;
+const onBlur = () => {
+  timer = setTimeout(() => {
+    trigger.value = false
+  }, 100)
+}
+const onChange = (val : string) => {
+  if((parseInt(val) + '') !='') {
+    return false
+  }
+}
+
 let dialogForm = dialog
 const handleEdit = (row: any) => {
   dialogForm.value = true
-  console.log(row.icon);
   nextTick(() => {
     form.id = row.id
     form.name = row.name
@@ -159,15 +170,43 @@ const handleEdit = (row: any) => {
 
 }
 
-const handleDel = (row: Menus) => {
-  console.log(row.id);
+const handleDel = (row: Menus) => {+
+  ElMessageBox.confirm('是否删除此数据，此操作将导致以此为父级菜单被移除！', '系统提示', {
+    showCancelButton: true,
+    confirmButtonClass: 'el-button--danger'
+  }).then(() => {
+    removeMenu(row).then((res : Res) => {
+      if(res.code === 200) {
+        getDataList();
+      }
+    })
+  })
+  
 }
 
+const handleSubmit = () => {
+  refForm.value?.validate((valid : boolean) => {
+    if(valid) {
+      if((form.id ?? '') == '') {
+        addMenu(form).then((res : Res) => {
+          if(res.code === 200) {
+            refForm.value?.resetFields()
+          }
+        })
+      }else {
+        updateMenu(form).then((res : Res) => {
+          if(res.code === 200) {
+            dialogForm.value = false
+          }
+        })
+      }
+    }
+  })
+}
 
-
-
-
-
+onBeforeUnmount(() => {
+  timer && clearTimeout(timer)
+})
 </script>
 
 <style lang="scss" scoped>
