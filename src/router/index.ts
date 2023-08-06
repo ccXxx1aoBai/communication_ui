@@ -23,6 +23,9 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
   NProgress.start()
+  if(to.fullPath == from.fullPath) {
+    next()
+  }
   if(to.name == 'login') {
     next()
   }else {
@@ -32,6 +35,7 @@ router.beforeEach(async (to, from, next) => {
       }else {
         await store.dispatch('getRoute', store).then((res : Res) => {
           if(res.code === 200) {
+            console.log(res.data);
             store.dispatch('storeRoutes', res.data)
             const list : any = getRoutes(res.data)
             list.forEach((route : any) => {

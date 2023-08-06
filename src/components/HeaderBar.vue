@@ -5,7 +5,7 @@
         <img :src="avatar" class="avatar_img">
       </div>
       <div class="info">
-        <el-dropdown>
+        <el-dropdown @command="handleMenu">
           <p class="name">
             <span>{{ userName }}</span>
             <el-icon>
@@ -14,8 +14,8 @@
           </p>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>修改密码</el-dropdown-item>
-              <el-dropdown-item>退出</el-dropdown-item>
+              <el-dropdown-item command="1">修改密码</el-dropdown-item>
+              <el-dropdown-item command="0">退出</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
@@ -28,10 +28,20 @@
 <script setup lang='ts'>
 import { useStore } from 'vuex';
 import { ref } from 'vue'
+import { ElMessageBox } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 const store = useStore();
 const userName = ref(store.getters.nickname)
 const avatar = ref('/api' + store.getters.avatar)
+const router = useRouter()
+const handleMenu = (command : String | Number) => {
+  if(command == '0') {
+    ElMessageBox.confirm('是否退出当前账号？', '系统提示').then(() => {
+      router.replace('/')
+    })
+  }
+}
 </script>
   
 <style lang="scss" scoped>
@@ -68,6 +78,7 @@ const avatar = ref('/api' + store.getters.avatar)
       align-items: center;
       font-size: 18px;
       outline: none;
+      cursor: pointer;
     }
   }
 }

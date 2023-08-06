@@ -10,7 +10,7 @@
 import NavMenuChild from './NavMenuChild.vue';
 import { reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { useStore } from 'vuex'
+import { useStore } from 'vuex';
 
 const store = useStore()
 const data = reactive(store.getters.routes)
@@ -18,10 +18,8 @@ const data = reactive(store.getters.routes)
 
 const route = useRoute();
 let active = ref(route.fullPath)
-watch(route, (val, oldVal) => {
-  console.log(1, val, 2, oldVal);
+watch(route, (val) => {
   active = ref(val.fullPath)
-  console.log(val.fullPath);
 })
 </script>
 
