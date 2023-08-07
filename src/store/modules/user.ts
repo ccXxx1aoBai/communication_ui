@@ -73,12 +73,15 @@ export default {
       const routes : Menus[] = []
       return new Promise((resolve, reject) => {
         getRoute({ role: store.getters.role }).then((res: Res) => {
-          res.data.forEach((route : Menus) => {
-            route.component && routes.push(route);
-            route.children && routes.push(...route.children)
-          })
-          store.dispatch('storeRoutes', res.data)
-          resolve(routes)
+          if(res.code === 200) {
+            res.data.forEach((route : Menus) => {
+              route.component && routes.push(route);
+              route.children && routes.push(...route.children)
+            })
+            store.dispatch('storeRoutes', res.data)
+            resolve(routes)
+          }
+          reject(res.msg)
         }).catch((error: Error) => {
           reject(error)
         })

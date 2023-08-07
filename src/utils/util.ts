@@ -3,7 +3,7 @@
  * @param memus 路由数据
  * @returns 
  */
-export const getRoutes = (memus : []) : Menus[] => {
+export const getRoutes = (memus : Menus[]) : Menus[] => {
   const data : Menus[] = []
   const modules = import.meta.glob(`@/**/*.vue`);
   memus.forEach((item : Menus) => {

@@ -21,4 +21,17 @@ declare global {
       title?: string
     }
   }
+
+  interface Log {
+    id: String,
+    user: String,
+    ip: String,
+    method: String,
+    args: String,
+    agent: String,
+    opType: String,
+    description: String,
+    longTime: String | Number,
+    createTime: String,
+  }
 }

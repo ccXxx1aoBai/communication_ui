@@ -21,33 +21,29 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   NProgress.start()
-  if(to.fullPath == from.fullPath) {
-    next()
-  }
   if(to.name == 'login') {
     next()
+    return
   }else {
     if(store.getters.token) {
       if(router.getRoutes().length > 2) {
         next()
+        return
       }else {
-        await store.dispatch('getRoute', store).then((res : Res) => {
-          if(res.code === 200) {
-            console.log(res.data);
-            store.dispatch('storeRoutes', res.data)
-            const list : any = getRoutes(res.data)
-            list.forEach((route : any) => {
-              router.addRoute('layout', route);
-            })
-            // next({ replace: true, ...list[0] });
+        store.dispatch('getRoute', store).then((routes : Menus[]) => {
+          const list : any = getRoutes(routes)
+          for(let i = 0; i < list.length; i++) {
+            router.addRoute('layout', list[i]);
           }
+          next({ replace: true, ...to });
         })
-        next({ replace: true, ...to });
+        return
       }
     }else {
       next('/')
+      return
     }
   }
 })

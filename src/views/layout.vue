@@ -5,7 +5,7 @@
         <header-bar />
       </el-header>
       <el-container style="height: 100%;">
-        <el-aside width="160px">
+        <el-aside width="200px">
           <nav-menu />
         </el-aside>
         <el-main>

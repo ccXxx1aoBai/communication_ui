@@ -197,7 +197,7 @@ onMounted(() => {
 });
 
 let dataList = ref<Menus[]>([]);
-let menus = reactive<Menus[]>([]);
+let menus = ref<Menus[]>([]);
 const getDataList = () => {
   getMenu({
     size: size.value,
@@ -207,8 +207,8 @@ const getDataList = () => {
     if (res.code === 200) {
       dataList.value = res.data.data;
       total.value = res.data.total;
-      menus = JSON.parse(JSON.stringify(dataList.value));
-      menus.unshift({ id: 0, label: '根目录', sort: 0 });
+      menus.value = JSON.parse(JSON.stringify(dataList.value));
+      menus.value.unshift({ id: 0, label: '根目录', sort: 0 });
     }
   });
 };
@@ -231,7 +231,6 @@ const refForm = ref<FormInstance>();
 
 let curIcon = ref('Home');
 const selectIcon = (icon: string) => {
-  console.log(2, icon);
   form.icon = icon;
   curIcon.value = icon;
 };

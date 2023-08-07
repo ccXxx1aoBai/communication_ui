@@ -6,7 +6,7 @@
     <template #dropdown>
       <el-dropdown-menu>
         <el-dropdown-item>
-          <el-button icon="edit" text class="waring" @click="handleEdit(row)">修改</el-button>
+          <el-button icon="edit" text class="warning" @click="handleEdit(row)">修改</el-button>
         </el-dropdown-item>
         <el-dropdown-item>
           <el-button icon="delete" text class="delete" @click="handleDel(row)">删除</el-button>

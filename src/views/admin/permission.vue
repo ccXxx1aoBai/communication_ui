@@ -64,21 +64,21 @@ import { ref, reactive, onMounted } from 'vue';
 import { FormInstance } from 'element-plus';
 import { formatMenu, deRepeat, getCascaderDefaultVal } from '@/utils/util'
 
-let dataList = reactive([])
+let dataList = ref([])
 const menuArr = ref<string>('')
 const getDataList = () => {
   getData({ size: size.value, current: current.value, siftName: siftName.value }).then((res: Res) => {
     const { code, data } = res
     if (code === 200) {
-      dataList = data.data;
+      dataList.value = data.data;
       total.value = data.total
     }
   })
 }
-let menus = reactive<Menus[]>([])
+let menus = ref<Menus[]>([])
 getAllMenu().then((res: Res) => {
   if (res.code === 200) {
-    menus = formatMenu(res.data)
+    menus.value = formatMenu(res.data)
   }
 })
 changePageSize(getDataList)
