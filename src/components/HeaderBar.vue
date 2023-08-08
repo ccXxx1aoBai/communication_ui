@@ -1,5 +1,8 @@
 <template>
   <div class="bar">
+    <div class="bar-l">
+      <img src="@/assets/logo.png" alt="logo">
+    </div>
     <div class="user">
       <div class="avatar">
         <img :src="avatar" class="avatar_img">
@@ -51,6 +54,16 @@ const handleMenu = (command : String | Number) => {
   justify-content: flex-end;
   width: 100%;
   height: 100%;
+
+  .bar-l {
+    width: 100%;
+
+    img {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+    }
+  }
 
   .user {
     display: flex;

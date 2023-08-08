@@ -41,7 +41,7 @@ watch(route, (val) => {
 .el-main {
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
+  background-color: #F8F8F9;
 }
 
 .logo {

@@ -34,4 +34,42 @@ declare global {
     longTime: String | Number,
     createTime: String,
   }
+
+  interface Article {
+    id: String,
+    authorId: String,
+    author: String,
+    content?: String,
+    resource?: String | String[],
+    type: String | Number,
+    status: String | Number,
+    createTime: String,
+    publishTime?: String
+  }
+
+  interface Feedback {
+    id: String,
+    user: String,
+    type: String,
+    status: String,
+    content?: String,
+    imgs?: String | String[],
+    createTime: String,
+    replyTime?: String,
+    resolveTime?: String
+  }
+
+  interface User {
+    id: String,
+    username: String,
+    password?: String,
+    phone?: String,
+    openId?: String,
+    role?: String,
+    createTime: String,
+    nickname: String,
+    avatar: String,
+    sex?: Number,
+    birth?: String
+  }
 }

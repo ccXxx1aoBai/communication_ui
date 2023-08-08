@@ -33,7 +33,7 @@
           <el-table-column prop="status" label="状态" align="center"></el-table-column>
           <el-table-column prop="type" label="类型" align="center"></el-table-column>
           <el-table-column prop="createTime" label="创建时间" align="center"></el-table-column>
-          <el-table-column prop="" label="发布时间" align="center"></el-table-column>
+          <el-table-column prop="publishTime" label="发布时间" align="center"></el-table-column>
           <el-table-column label="操作" align="center">
             <template v-slot="scope">
               <el-dropdown :show-timeout="50">
@@ -43,16 +43,16 @@
               <template #dropdown>
                 <el-dropdown-menu>
                   <el-dropdown-item>
-                    <el-button icon="select" text class="warning">审核</el-button>
+                    <el-button icon="select" text class="warning" @click="handlePass(scope.row)">审核</el-button>
                   </el-dropdown-item>
                   <el-dropdown-item>
-                    <el-button icon="close-bold" text class="warning">拒绝</el-button>
+                    <el-button icon="close-bold" text class="warning" @click="handleReject(scope.row)">拒绝</el-button>
                   </el-dropdown-item>
                   <el-dropdown-item>
-                    <el-button icon="edit" text class="warning">下架</el-button>
+                    <el-button icon="edit" text class="warning" @click="handleDown(scope.row)">下架</el-button>
                   </el-dropdown-item>
                   <el-dropdown-item>
-                    <el-button icon="delete" text class="delete">删除</el-button>
+                    <el-button icon="delete" text class="delete" @click="handleDel(scope.row)">删除</el-button>
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -104,8 +104,23 @@ const status = ref([
     value: '4'
   }
 ])
-const dataList = ref([{}])
+const dataList = ref<Article[]>([])
   
+const handlePass = (row: Article) => {
+  console.log(row);
+}
+
+const handleReject = (row: Article) => {
+  console.log(row);
+}
+
+const handleDown = (row: Article) => {
+  console.log(row);
+}
+
+const handleDel = (row: Article) => {
+  console.log(row);
+}
 
 </script>
   

@@ -183,7 +183,6 @@ const system = ref<any>({});
 const database = ref<any>({});
 getSystemInfo().then((res: Res) => {
   const { code, data } = res;
-  console.log(data);
   if (code === 200) {
     Object.keys(data.cpu).forEach((key: any) => {
       cpu.value.push({ name: key, value: data.cpu[key] });
@@ -202,6 +201,7 @@ getSystemInfo().then((res: Res) => {
   background-color: #ffffff;
   padding: 14px;
   margin-bottom: 20px;
+  border-radius: 16px;
 }
 .content {
   display: flex;
