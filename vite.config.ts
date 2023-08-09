@@ -29,6 +29,11 @@ export default defineConfig((mode: ConfigEnv) => {
           target: 'http://localhost:9090',
           changeOrigin: true,
           rewrite: (path) => path.replace('/api', '')
+        },
+        '/ws': {
+          target: 'ws://localhost:9090',
+          changeOrigin: true,
+          rewrite: (path) => path.replace('/ws', '')
         }
       },
       port: env.VITE_PORT as unknown as number,

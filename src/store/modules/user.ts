@@ -1,6 +1,5 @@
 import AesUtil from "@/utils/AesUtil";
-import { getRoute } from '@/api/common'
-import { getRoutes } from "@/utils/util";
+import { getRoute } from '@/api/common';
 
 export default {
   state: {

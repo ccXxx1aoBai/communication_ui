@@ -9,8 +9,18 @@
         ></el-table-column>
         <el-table-column prop="ip" label="IP" align="center"></el-table-column>
         <el-table-column
-          prop="agent"
-          label="Agent"
+          prop="platform"
+          label="设备类型"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="os"
+          label="设备系统"
+          align="center"
+        ></el-table-column>
+        <el-table-column
+          prop="browser"
+          label="访问源"
           align="center"
           width="200"
           show-overflow-tooltip
@@ -24,8 +34,6 @@
           prop="args"
           label="入参"
           align="center"
-          width="150"
-          show-overflow-tooltip
         ></el-table-column>
         <el-table-column
           prop="opType"
