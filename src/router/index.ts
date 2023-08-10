@@ -24,11 +24,12 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   NProgress.start()
   if(to.name == 'login') {
+    store.dispatch('clear')
     next()
     return
   }else {
     if(store.getters.token) {
-      if(router.getRoutes().length > 2) {
+      if(router.getRoutes().length > 2 && store.getters.routes) {
         next()
         return
       }else {

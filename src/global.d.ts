@@ -72,4 +72,29 @@ declare global {
     sex?: Number,
     birth?: String
   }
+
+  interface Message {
+    body: {
+      type: Number,
+      content?: String
+    },
+    sendBy: {
+      id: String,
+      username?: String,
+      avatar?: String
+    },
+    reception: {
+      id: String,
+      username?: String,
+      avatar?: String
+    }
+  }
+
+  interface Permission {
+    id: String,
+    name: String,
+    label: String,
+    menus: String,
+    menuLabel?: String
+  }
 }

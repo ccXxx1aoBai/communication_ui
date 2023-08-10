@@ -77,7 +77,11 @@ export default {
               route.component && routes.push(route);
               route.children && routes.push(...route.children)
             })
-            store.dispatch('storeRoutes', res.data)
+            // store.dispatch('storeRoutes', res.data)
+            res.data.sort((a : Menus, b : Menus) => {
+              return a.sort - b.sort
+            })
+            store.commit('SET_ROUTES', res.data);
             resolve(routes)
           }
           reject(res.msg)
@@ -86,11 +90,16 @@ export default {
         })
       })
     },
-    storeRoutes: ({ commit }: any, data: any) => {
-      data.sort((a : Menus, b : Menus) => {
-        return a.sort - b.sort
-      })
-      commit('SET_ROUTES', data);
-    },
+    clear: ({ commit }: any) => {
+      commit('SET_ID', '');
+      commit('SET_NICKNAME', '');
+      commit('SET_USERNAME', '');
+      commit('SET_ROLE', '');
+      commit('SET_ROLENAME', '');
+      commit('SET_AVATAR', '');
+      commit('SET_PHONE', '');
+      commit('SET_ROUTES', '');
+      // localStorage.clear()
+    }
   },
 }

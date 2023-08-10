@@ -37,6 +37,11 @@
             {{ scope.row.online ? '是' : '否' }}
           </template>
         </el-table-column>
+        <el-table-column prop="online" label="是否可用" align="center">
+          <template v-slot="scope">
+            {{ scope.row.enable == '1' ? '是' : scope.row.enable == '0' ? '否' : '' }}
+          </template>
+        </el-table-column>
         <el-table-column
           prop="createTime"
           label="注册时间"
@@ -50,7 +55,7 @@
               </el-icon>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item>
+                  <el-dropdown-item v-if="scope.row.enable == '0'">
                     <el-button
                       icon="finished"
                       text
@@ -59,7 +64,7 @@
                       >启用</el-button
                     >
                   </el-dropdown-item>
-                  <el-dropdown-item>
+                  <el-dropdown-item v-else-if="scope.row.enable == '1'">
                     <el-button
                       icon="select"
                       text
@@ -119,15 +124,18 @@ onMounted(() => {
 });
 
 const handleEnable = (row: User) => {
-  console.log(row);
   enableUser({ id: row.id }).then((res: Res) => {
-    console.log(res);
+    if(res.code === 200) {
+      getDataList()
+    }
   });
 };
 
 const handleBanned = (row: User) => {
   bannedUser({ id: row.id }).then((res: Res) => {
-    console.log(res);
+    if(res.code === 200) {
+      getDataList()
+    }
   });
 };
 </script>

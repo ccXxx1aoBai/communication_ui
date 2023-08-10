@@ -11,7 +11,7 @@ export default {
     connectionSocket: ({ commit }: any, data : any) => {
       const socket = new WebSocket(`${import.meta.env.VITE_BASE_WS}/socket/${data}/合肥市`)
       socket.onopen = () => {
-        (window as any).socket = socket
+        (window as any).socket || ((window as any).socket = socket)
         console.log('连接成功');
       }
       socket.onclose = () => {

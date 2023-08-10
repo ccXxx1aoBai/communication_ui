@@ -16,4 +16,7 @@
   color: #333333;
   user-select: none;
 }
+.el-icon {
+  cursor: pointer;
+}
 </style>

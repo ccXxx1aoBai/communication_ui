@@ -87,7 +87,8 @@ server.interceptors.response.use(
     }
     if (status === 404) {
       errorNotification(Prompt.RESOURCE_NO_EXIST);
-    } else if (status === 401 || status === 403) {
+    } else if (status === 401) {
+      store.dispatch('clear')
       ElMessageBox.alert('身份已过期，请重新登陆', '系统提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -116,6 +117,7 @@ server.interceptors.response.use(
     const { status } = error.response;
     console.log('请求失败：', error.response);
     if (status === 403) {
+      store.dispatch('clear')
       ElMessageBox.alert('权限不足，请重新登陆', '系统提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

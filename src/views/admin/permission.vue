@@ -64,7 +64,7 @@ import { ref, reactive, onMounted } from 'vue';
 import { FormInstance } from 'element-plus';
 import { formatMenu, deRepeat, getCascaderDefaultVal } from '@/utils/util'
 
-let dataList = ref([])
+let dataList = ref<Permission[]>([])
 const menuArr = ref<string>('')
 const getDataList = () => {
   getData({ size: size.value, current: current.value, siftName: siftName.value }).then((res: Res) => {
@@ -84,7 +84,7 @@ getAllMenu().then((res: Res) => {
 changePageSize(getDataList)
 
 const dialog = ref<boolean>(false)
-const form = reactive({
+const form = reactive<Permission>({
   id: '',
   name: '',
   label: '',
