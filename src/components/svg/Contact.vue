@@ -18,7 +18,7 @@
 </template>
   
 <script setup lang='ts'>
-const { color, size } = withDefaults(defineProps<{
+const { size } = withDefaults(defineProps<{
   color?: string,
   size?: number
 }>(), {

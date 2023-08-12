@@ -23,6 +23,7 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
+  if(to == from) {}
   if(to.name == 'login') {
     store.dispatch('clear')
     next()

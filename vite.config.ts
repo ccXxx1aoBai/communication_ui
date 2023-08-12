@@ -38,6 +38,14 @@ export default defineConfig((mode: ConfigEnv) => {
       },
       port: env.VITE_PORT as unknown as number,
       host: env.VITE_HOST
+    },
+    esbuild: {
+      drop: ['console', 'debugger']
+    },
+    build: {
+      rollupOptions: {
+        input: './index.html'
+      }
     }
   }
 })

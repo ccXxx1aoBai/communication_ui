@@ -10,3 +10,5 @@ declare module 'vuex';
 declare module 'nprogress';
 
 declare module 'element-plus/dist/locale/zh-cn.mjs';
+
+declare module 'crypto-js';
