@@ -97,4 +97,14 @@ declare global {
     menus: String,
     menuLabel?: String
   }
+
+  interface Upgrade {
+    id?: String | Number,
+    version: String,
+    versionCode: Number | String,
+    platform: String,
+    force: boolean,
+    description: String,
+    createTime?: String
+  }
 }
