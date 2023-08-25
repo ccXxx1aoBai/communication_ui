@@ -118,7 +118,7 @@ server.interceptors.response.use(
     console.log('请求失败：', error.response);
     if (status === 403) {
       store.dispatch('clear')
-      ElMessageBox.alert('权限不足，请重新登陆', '系统提示', {
+      ElMessageBox.alert('身份过期，请重新登陆', '系统提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'

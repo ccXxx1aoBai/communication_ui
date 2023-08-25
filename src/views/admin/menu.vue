@@ -290,12 +290,14 @@ const handleSubmit = () => {
         addMenu(form).then((res: Res) => {
           if (res.code === 200) {
             refForm.value?.resetFields();
+            getDataList();
           }
         });
       } else {
         updateMenu(form).then((res: Res) => {
           if (res.code === 200) {
             dialogForm.value = false;
+            getDataList();
           }
         });
       }

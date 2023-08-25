@@ -13,6 +13,7 @@ export default {
     nickname: '',
     phone: '',
     routes: [],
+    user: {}
   },
   mutations: {
     SET_TOKEN: (state: any, data: string) => {
@@ -44,6 +45,9 @@ export default {
     },
     SET_ROUTES: (state: any, data: any) => {
       state.routes = data;
+    },
+    SET_USER: (state: any, data: any) => {
+      state.user = data
     }
   },
   actions: {
@@ -64,6 +68,7 @@ export default {
       commit('SET_ROLENAME', AesUtil.encrypt(roleName));
       commit('SET_AVATAR', AesUtil.encrypt(avatar));
       commit('SET_PHONE', AesUtil.encrypt(phone))
+      commit('SET_USER', AesUtil.encrypt(JSON.stringify(data)))
     },
     storeToken: ({ commit }: any, data: string) => {
       commit('SET_TOKEN', AesUtil.encrypt(data));
@@ -99,6 +104,7 @@ export default {
       commit('SET_AVATAR', '');
       commit('SET_PHONE', '');
       commit('SET_ROUTES', '');
+      commit('SET_USER', {})
       // localStorage.clear()
     }
   },

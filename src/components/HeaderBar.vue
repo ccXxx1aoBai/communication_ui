@@ -17,7 +17,7 @@
           </p>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item command="1">修改密码</el-dropdown-item>
+              <el-dropdown-item command="1">个人中心</el-dropdown-item>
               <el-dropdown-item command="0">退出</el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -43,6 +43,8 @@ const handleMenu = (command : String | Number) => {
     ElMessageBox.confirm('是否退出当前账号？', '系统提示').then(() => {
       router.replace('/')
     })
+  }else if(command == '1') {
+    router.push('/info')
   }
 }
 </script>

@@ -9,6 +9,7 @@ export default {
   roleName: (state : any) => AesUtil.decrypt(state.user.roleName),
   avatar: (state : any) => AesUtil.decrypt(state.user.avatar),
   phone: (state : any) => AesUtil.decrypt(state.user.phone),
+  user: (state : any) => AesUtil.decrypt(state.user.user),
   routes: (state : any) => state.user.routes,
   socket: (state : any) => state.socket.socket
 }

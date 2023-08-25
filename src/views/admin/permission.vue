@@ -12,7 +12,7 @@
       </el-row>
     </div>
     <div class="table">
-      <el-table :data="dataList" :height="650">
+      <el-table :data="dataList" :height="610">
         <el-table-column prop="id" label="#" align="center"></el-table-column>
         <el-table-column prop="name" label="标识" align="center"></el-table-column>
         <el-table-column prop="label" label="身份名称" align="center"></el-table-column>

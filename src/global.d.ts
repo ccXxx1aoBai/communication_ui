@@ -23,88 +23,91 @@ declare global {
   }
 
   interface Log {
-    id: String,
-    user: String,
-    ip: String,
-    method: String,
-    args: String,
-    agent: String,
-    opType: String,
-    description: String,
-    longTime: String | Number,
-    createTime: String,
+    id: string,
+    user: string,
+    ip: string,
+    method: string,
+    args: string,
+    agent: string,
+    opType: string,
+    description: string,
+    longTime: string | number,
+    createTime: string,
   }
 
   interface Article {
-    id: String,
-    authorId: String,
-    author: String,
-    content?: String,
-    resource?: String | String[],
-    type: String | Number,
-    status: String | Number,
-    createTime: String,
-    publishTime?: String
+    id: string,
+    authorId: string,
+    author: string,
+    content?: string,
+    resource?: string | string[],
+    type: string | number,
+    status: string | number,
+    createTime: string,
+    publishTime?: string
   }
 
   interface Feedback {
-    id: String,
-    user: String,
-    type: String,
-    status: String,
-    content?: String,
-    imgs?: String | String[],
-    createTime: String,
-    replyTime?: String,
-    resolveTime?: String
+    id: string,
+    user: string,
+    type: string,
+    status: string,
+    content?: string,
+    imgs?: string | string[],
+    createTime: string,
+    replyTime?: string,
+    resolveTime?: string
   }
 
   interface User {
-    id: String,
-    username: String,
-    password?: String,
-    phone?: String,
-    openId?: String,
-    role?: String,
-    createTime: String,
-    nickname: String,
-    avatar: String,
-    sex?: Number,
-    birth?: String
+    id: string,
+    username: string,
+    password?: string,
+    phone?: string,
+    openId?: string,
+    role?: string,
+    roleName?: string,
+    createTime?: string,
+    nickname: string,
+    avatar: string,
+    sex?: number | string,
+    birth?: string,
+    email?: string,
+    roleLabel?: string
   }
 
   interface Message {
     body: {
-      type: Number,
-      content?: String
+      type: number,
+      content?: string
     },
     sendBy: {
-      id: String,
-      username?: String,
-      avatar?: String
+      id: string,
+      username?: string,
+      avatar?: string
     },
     reception: {
-      id: String,
-      username?: String,
-      avatar?: String
+      id: string,
+      username?: string,
+      avatar?: string
     }
   }
 
   interface Permission {
-    id: String,
-    name: String,
-    label: String,
-    menus: String,
-    menuLabel?: String
+    id: string,
+    name: string,
+    label: string,
+    menus: string,
+    menuLabel?: string
   }
 
   interface Upgrade {
-    id?: String | Number,
-    version: String,
-    versionCode: Number | String,
-    platform: String,
-    force: boolean,
-    description: String,
-    createTime?: String
+    id?: string | number,
+    version: string,
+    versionCode: number | string,
+    platform: string,
+    force: boolean | number,
+    description: string,
+    createTime?: string
   }
 }

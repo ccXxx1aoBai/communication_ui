@@ -11,7 +11,7 @@
       </el-row>
     </div>
     <div class="table">
-      <el-table :data="dataList" height="650">
+      <el-table :data="dataList" :height="610">
         <el-table-column prop="avatar" label="头像" align="center">
           <template v-slot="scope">
             <el-avatar :src="scope.row.avatar"></el-avatar>
