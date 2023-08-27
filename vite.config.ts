@@ -34,14 +34,24 @@ export default defineConfig((mode: ConfigEnv) => {
           target: 'ws://localhost:9090',
           changeOrigin: true,
           rewrite: (path) => path.replace('/ws', '')
-        }
+        },
+        '/baidu': {
+          target: 'https://api.map.baidu.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace('/baidu', '')
+        },
+        '/tencent': {
+          target: 'https://apis.map.qq.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace('/tencent', '')
+        },
       },
       port: env.VITE_PORT as unknown as number,
       host: env.VITE_HOST
     },
     base: './',
     esbuild: {
-      drop: ['console', 'debugger']
+      drop: []
     },
     build: {
       rollupOptions: {

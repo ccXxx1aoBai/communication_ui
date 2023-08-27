@@ -1,16 +1,14 @@
 <template>
   <div class="bar">
-    <div class="bar-l">
-      <img src="@/assets/logo.png" alt="logo">
-    </div>
+    <div class="bar-l"></div>
     <div class="user">
       <div class="avatar">
-        <img :src="avatar" class="avatar_img">
+        <img :src="avatar" class="avatar_img" />
       </div>
       <div class="info">
         <el-dropdown @command="handleMenu">
           <p class="name">
-            <span>{{ userName }}</span>
+            <span>{{ nickName }}</span>
             <el-icon>
               <caret-bottom />
             </el-icon>
@@ -22,33 +20,32 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-
       </div>
     </div>
   </div>
 </template>
-  
-<script setup lang='ts'>
+
+<script setup lang="ts">
 import { useStore } from 'vuex';
-import { ref } from 'vue'
-import { ElMessageBox } from 'element-plus'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { ElMessageBox } from 'element-plus';
+import { useRouter } from 'vue-router';
 
 const store = useStore();
-const userName = ref(store.getters.nickname)
-const avatar = ref('/api' + store.getters.avatar)
-const router = useRouter()
-const handleMenu = (command : String | Number) => {
-  if(command == '0') {
+const nickName = ref(store.getters.nickname);
+const avatar = ref(store.getters.avatar);
+const router = useRouter();
+const handleMenu = (command: String | Number) => {
+  if (command == '0') {
     ElMessageBox.confirm('是否退出当前账号？', '系统提示').then(() => {
-      router.replace('/')
-    })
-  }else if(command == '1') {
-    router.push('/info')
+      router.replace('/');
+    });
+  } else if (command == '1') {
+    router.push('/info');
   }
-}
+};
 </script>
-  
+
 <style lang="scss" scoped>
 .bar {
   display: flex;

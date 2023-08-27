@@ -13,13 +13,6 @@ const routes: Array<RouteRecordRaw> = [
     path: '/index',
     name: 'layout',
     component: () => import('@/views/layout.vue'),
-    children: [
-      {
-        path: '/info',
-        name: 'info',
-        component: () => import('@/views/commons/info.vue')
-      }
-    ]
   }
 ]
 
@@ -49,6 +42,11 @@ router.beforeEach((to, from, next) => {
           for(let i = 0; i < list.length; i++) {
             router.addRoute('layout', list[i]);
           }
+          router.addRoute('layout', {
+            path: '/info',
+            name: '/info',
+            component: () => import('@/views/commons/info.vue')
+          });
           next({ replace: true, ...to });
         })
         return

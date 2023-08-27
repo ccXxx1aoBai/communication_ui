@@ -67,9 +67,8 @@ const handleLogin = async () => {
     if (valid) {
       await login(form).then((res: Res) => {
         if (res.code === 200) {
-          store.dispatch('connectionSocket', res.data.id)
-          store.dispatch('storeInfo', res.data)
-          router?.push('/index')
+          store.dispatch('getUserInfo')
+          router?.push('/info')
         }
       })
     }

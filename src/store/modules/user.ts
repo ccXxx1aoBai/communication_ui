@@ -1,5 +1,6 @@
 import AesUtil from "@/utils/AesUtil";
 import { getRoute } from '@/api/common';
+import { getInfo } from '@/api/user'
 
 export default {
   state: {
@@ -13,41 +14,45 @@ export default {
     nickname: '',
     phone: '',
     routes: [],
-    user: {}
+    user: {},
+    roleLabel: ''
   },
   mutations: {
     SET_TOKEN: (state: any, data: string) => {
-      state.token = data;
+      state.token = AesUtil.encrypt(data);
     },
     SET_ID: (state: any, data: string) => {
-      state.id = data;
+      state.id =  AesUtil.encrypt(data);
     },
     SET_USERNAME: (state: any, data: string) => {
-      state.username = data;
+      state.username = AesUtil.encrypt(data);
     },
     SET_NICKNAME: (state: any, data: string) => {
-      state.nickname = data;
+      state.nickname = AesUtil.encrypt(data);
     },
     SET_PASSWORD: (state: any, data: string) => {
-      state.password = data;
+      state.password = AesUtil.encrypt(data);
     },
     SET_ROLE: (state: any, data: string) => {
-      state.role = data;
+      state.role = AesUtil.encrypt(data);
     },
     SET_ROLENAME: (state: any, data: string) => {
-      state.roleName = data;
+      state.roleName = AesUtil.encrypt(data);
     },
     SET_AVATAR: (state: any, data: string) => {
-      state.avatar = data;
+      state.avatar = AesUtil.encrypt(data);
     },
     SET_PHONE: (state: any, data: string) => {
-      state.phone = data
+      state.phone = AesUtil.encrypt(data);
     },
     SET_ROUTES: (state: any, data: any) => {
       state.routes = data;
     },
     SET_USER: (state: any, data: any) => {
-      state.user = data
+      state.user = AesUtil.encrypt(data);
+    },
+    SET_ROLELABEL: (state: any, data: any) => {
+      state.roleLabel = AesUtil.encrypt(data);
     }
   },
   actions: {
@@ -60,18 +65,20 @@ export default {
         roleName,
         phone,
         avatar,
+        roleLabel
       } = data;
-      commit('SET_ID', AesUtil.encrypt(id));
-      commit('SET_NICKNAME', AesUtil.encrypt(nickname));
-      commit('SET_USERNAME', AesUtil.encrypt(username));
-      commit('SET_ROLE', AesUtil.encrypt(role));
-      commit('SET_ROLENAME', AesUtil.encrypt(roleName));
-      commit('SET_AVATAR', AesUtil.encrypt(avatar));
-      commit('SET_PHONE', AesUtil.encrypt(phone))
-      commit('SET_USER', AesUtil.encrypt(JSON.stringify(data)))
+      commit('SET_ID', id);
+      commit('SET_NICKNAME', nickname);
+      commit('SET_USERNAME', username);
+      commit('SET_ROLE', role);
+      commit('SET_ROLENAME', roleName);
+      commit('SET_ROLELABEL', roleLabel)
+      commit('SET_AVATAR', import.meta.env.VITE_FILE + avatar);
+      commit('SET_PHONE', phone)
+      commit('SET_USER', JSON.stringify(data))
     },
     storeToken: ({ commit }: any, data: string) => {
-      commit('SET_TOKEN', AesUtil.encrypt(data));
+      commit('SET_TOKEN', data);
     },
     getRoute: (store: any) => {
       const routes : Menus[] = []
@@ -96,6 +103,7 @@ export default {
       })
     },
     clear: ({ commit }: any) => {
+      
       commit('SET_ID', '');
       commit('SET_NICKNAME', '');
       commit('SET_USERNAME', '');
@@ -106,6 +114,32 @@ export default {
       commit('SET_ROUTES', '');
       commit('SET_USER', {})
       // localStorage.clear()
+    },
+    getUserInfo: ({ commit, dispatch }: any) => {
+      getInfo().then((res: Res) => {
+        if(res.code === 200) {
+          const {
+            id,
+            nickname,
+            username,
+            role,
+            roleName,
+            phone,
+            avatar,
+            roleLabel
+          } = res.data;
+          dispatch('connectionSocket', res.data.id)
+          commit('SET_ID', id);
+          commit('SET_NICKNAME', nickname);
+          commit('SET_USERNAME', username);
+          commit('SET_ROLE', role);
+          commit('SET_ROLENAME', roleName);
+          commit('SET_ROLELABEL', roleLabel)
+          commit('SET_AVATAR', import.meta.env.VITE_FILE + avatar);
+          commit('SET_PHONE', phone)
+          commit('SET_USER', JSON.stringify(res.data))
+        }
+      })
     }
   },
 }

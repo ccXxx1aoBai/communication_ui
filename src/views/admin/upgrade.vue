@@ -1,6 +1,19 @@
 <template>
   <div class="container">
-    <div class="form">
+    <div class="tools">
+      <el-button type="primary" icon="plus" @click="dialog = true">发布</el-button>
+    </div>
+    <div class="table">
+      <el-table :data="dataList" :height="610">
+        <el-table-column prop="" label="版本名称" align="center"></el-table-column>
+        <el-table-column prop="" label="版本号" align="center"></el-table-column>
+        <el-table-column prop="" label="更新平台" align="center"></el-table-column>
+        <el-table-column prop="" label="是否强制更新" align="center"></el-table-column>
+        <el-table-column prop="" label="发布时间" align="center"></el-table-column>
+      </el-table>
+    </div>
+
+    <el-dialog v-model="dialog" title="版本发布">
       <el-form :model="form" :rules="rules" ref="formRef" label-width="100px">
         <el-form-item prop="version" label="版本名称：">
           <div class="input-content">
@@ -106,12 +119,16 @@
           </div>
         </el-form-item>
       </el-form>
-    </div>
+
+      <template #footer>
+        <el-button type="primary">提交</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 
 <script setup lang="ts">
-import { UploadFilled } from '@element-plus/icons-vue';
+import { dataList, dialog } from '@/mixins'
 import {
   FormInstance,
   FormRules,
