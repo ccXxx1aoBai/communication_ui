@@ -109,6 +109,7 @@ declare global {
     forceUpdate: boolean | number,
     description: string,
     createTime?: string,
-    source?: string
+    source?: string,
+    current?: boolean
   }
 }

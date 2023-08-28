@@ -9,9 +9,9 @@ export const getData = (data: any) : any => {
 }
 
 export const versionRollback = (data: any) : any => {
-  return request.post('/upgrade/rollback')
+  return request.post('/upgrade/rollback', data)
 }
 
 export const removeVersion = (data: any) : any => {
-  return request.post('/upgrade/remove')
+  return request.post('/upgrade/remove', data)
 }

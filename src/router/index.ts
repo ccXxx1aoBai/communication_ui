@@ -22,7 +22,6 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('to', to);
   NProgress.start()
   if(to == from) {}
   if(to.name == 'login') {
@@ -31,8 +30,6 @@ router.beforeEach((to, from, next) => {
     return
   }else {
     if(store.getters.token) {
-      console.log(router.getRoutes().length);
-      console.log(store.getters.routes);
       if(router.getRoutes().length > 2 && store.getters.routes) {
         next()
         return

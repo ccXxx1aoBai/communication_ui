@@ -68,7 +68,7 @@ const handleLogin = async () => {
       await login(form).then((res: Res) => {
         if (res.code === 200) {
           store.dispatch('getUserInfo')
-          router?.push('/info')
+          router?.push('/index')
         }
       })
     }
