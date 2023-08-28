@@ -11,10 +11,9 @@ export default {
   },
   actions: {
     connectionSocket: async ({ commit }: any, data : any) => {
-      if(!(window as any).socket) {
+      if((window as any).socket == null) {
         let province = '安徽省'
-        const tencent = await axios.get('/tencent/ws/location/v1/ip?key=ND6BZ-MKA3N-BIGFS-S2OSU-2MP5E-U5BWD')
-        console.log(tencent);
+        const tencent = await axios.get('/tencent/ws/location/v1/ip?key=LD4BZ-DV4K6-7F5S6-ESIQ7-PTNI6-QYFK2')
         if(tencent.data.status == 0) {
           province = tencent.data.result.ad_info.province
         }else {
@@ -23,7 +22,6 @@ export default {
             province = gaode.data.province
           }else {
             const baidu = await axios.get('/baidu/location/ip?ak=9bGS2PrM76WAkBvO9z9fHwYPqSbLp57P')
-            console.log('baidu', baidu);
             if(baidu.data.status == 0) {
               province = baidu.data.content.address_detail.province
             }

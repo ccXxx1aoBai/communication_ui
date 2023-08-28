@@ -106,8 +106,9 @@ declare global {
     version: string,
     versionCode: number | string,
     platform: string,
-    force: boolean | number,
+    forceUpdate: boolean | number,
     description: string,
-    createTime?: string
+    createTime?: string,
+    source?: string
   }
 }

@@ -3,7 +3,6 @@ import * as Icon from '@/components/svg';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import { FormInstance } from 'element-plus';
 
-export let dataList = reactive([]) as any;
 export let total = ref(0);
 export const current = ref(1);
 export const size = ref(20);

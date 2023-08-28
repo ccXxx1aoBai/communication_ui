@@ -3,7 +3,7 @@
     <div class="table">
       <el-table :data="dataList" height="650">
         <el-table-column
-          prop="user"
+          prop="nickname"
           label="操作人"
           align="center"
         ></el-table-column>

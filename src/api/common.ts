@@ -1,6 +1,5 @@
 import request from '@/utils/request'
-import store from '@/store'
-import axios, { AxiosProgressEvent } from 'axios'
+import { AxiosProgressEvent } from 'axios'
 
 export const login = (data : any) : any => {
   return request.post('/login', data)
@@ -19,19 +18,15 @@ export const getSystemInfo = () : any => {
 }
 
 export const uploadFile = (file : File, type: string, callback?: Function) : any => {
-  return axios({
-    url: '/upload',
-    baseURL: import.meta.env.VITE_BASE_URL,
-    method: 'post',
-    data: {
-      file,
-      type
-    },
+  return request.post('/upload', {
+    file,
+    type
+  }, {
     headers: {
-      'Content-Type': 'multipart/form-data',
-      'token': store.getters.token
+      'Content-Type': 'multipart/form-data'
     },
     onUploadProgress: (progressEvent: AxiosProgressEvent) => {
+      console.log('progressEvent: ', progressEvent);
       callback && callback(progressEvent)
     },
   })

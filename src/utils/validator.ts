@@ -22,9 +22,7 @@ export const phoneRules = (rule: any, val: string, callback: any) => {
   }
 }
 
-let password = ''
 export const passwordValidator = (rule: any, val: string, callback: any) => {
-  password = val
   const reg = /([a-zA-Z0-9@$!%*?&^#~.]{6,20})/g
   if((val ?? '') == '') {
     callback(new Error('密码不能为空'))

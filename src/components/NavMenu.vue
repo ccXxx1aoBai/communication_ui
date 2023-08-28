@@ -3,7 +3,7 @@
     <el-menu
       router
       :default-active="active"
-      active-text-color="#409eff"
+      active-text-color="#A473E5"
       background-color="#545c64"
       text-color="#fff">
       <nav-menu-child

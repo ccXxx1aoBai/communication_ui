@@ -103,7 +103,6 @@ export default {
       })
     },
     clear: ({ commit }: any) => {
-      
       commit('SET_ID', '');
       commit('SET_NICKNAME', '');
       commit('SET_USERNAME', '');

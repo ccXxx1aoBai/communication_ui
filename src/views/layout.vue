@@ -34,7 +34,6 @@ import { ElMessageBox } from 'element-plus';
 
 const store = useStore();
 const router = useRouter();
-store.dispatch('connectionSocket', store.getters.id);
 store.dispatch('getUserInfo');
 store.getters.socket.onmessage = ({ data }: any) => {
   console.log('接收消息', data);

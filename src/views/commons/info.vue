@@ -89,13 +89,19 @@
                   <el-input
                     v-model="form.phone"
                     clearable
+                    disabled
                     placeholder="手机号码"
-                    maxlength="11"></el-input>
+                    maxlength="11">
+                  <template #suffix>
+                    <el-button type="text">修改</el-button>
+                  </template>
+                  </el-input>
                 </el-form-item>
                 <el-form-item prop="email" label="邮箱：">
                   <el-input
                     v-model="form.email"
                     clearable
+                    disabled
                     placeholder="邮箱"
                     maxlength="30"></el-input>
                 </el-form-item>
@@ -199,7 +205,6 @@ import { changeInfo, changePassword } from '@/api/user';
 import { useRouter } from 'vue-router';
 
 const acPasswordValidator = (rule: any, val: string, callback: any) => {
-  console.log(rule);
   if ((val ?? '') == '') {
     callback(new Error('确认密码不能为空'));
   } else {
