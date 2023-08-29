@@ -1,6 +1,8 @@
 <template>
   <div class="bar">
-    <div class="bar-l"></div>
+    <div class="bar-l">
+      
+    </div>
     <div class="user">
       <div class="avatar">
         <img :src="avatar" class="avatar_img" />

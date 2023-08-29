@@ -68,12 +68,12 @@ server.interceptors.request.use(
 server.interceptors.response.use(
   (response) => {
     closeLoading()
-    console.log(response.data);
     if (response.headers.token) {
       store.dispatch('storeToken', response.headers.token);
     }
     const { status } = response;
     const data: any = JSON.parse(AesUtil.decrypt(response.data));
+    console.log('请求结果：', data);
     if ((data ?? '') == '') {
       errorNotification('请求出错啦')
     }

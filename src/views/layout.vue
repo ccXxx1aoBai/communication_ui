@@ -30,7 +30,7 @@ import { useRoute, useRouter } from 'vue-router';
 import { ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import AesUtil from '@/utils/AesUtil';
-import { ElMessageBox } from 'element-plus';
+import { ElMessageBox, ElNotification } from 'element-plus';
 
 const store = useStore();
 const router = useRouter();
@@ -44,6 +44,13 @@ store.getters.socket.onmessage = ({ data }: any) => {
     ElMessageBox.alert('当前账号已被强制下线', '系统提示', {}).then(() => {
       router.replace('/');
     });
+  }else if(message.body.type == 10) {
+    ElNotification({
+      title: '系统提示',
+      message: message.body.content,
+      position: 'bottom-right',
+      icon: 'Promotion'
+    })
   }
 };
 
