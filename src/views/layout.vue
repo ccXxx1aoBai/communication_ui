@@ -52,7 +52,7 @@ store.getters.socket.onmessage = ({ data }: any) => {
       icon: 'Promotion'
     })
   }
-};
+});
 
 const route = useRoute();
 let title = ref<string | null | undefined | unknown>(route.meta?.title);
