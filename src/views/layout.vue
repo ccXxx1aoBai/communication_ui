@@ -34,7 +34,7 @@ import { ElMessageBox } from 'element-plus';
 
 const store = useStore();
 const router = useRouter();
-store.dispatch('getUserInfo');
+// store.dispatch('getUserInfo');
 store.getters.socket.onmessage = ({ data }: any) => {
   console.log('接收消息', data);
   const message: Message = JSON.parse(AesUtil.decrypt(data));

@@ -26,6 +26,7 @@ router.beforeEach((to, from, next) => {
   if(to == from) {}
   if(to.name == 'login') {
     store.dispatch('clear')
+    store.dispatch('closeSocket')
     next()
     return
   }else {
