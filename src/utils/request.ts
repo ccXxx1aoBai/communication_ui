@@ -7,7 +7,7 @@ import { ElNotification, ElMessage, ElMessageBox, ElLoading } from 'element-plus
 axios.defaults.headers['Content-Type'] = 'application/json;charset=UTF-8'
 
 const server = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL,
+  baseURL: import.meta.env.VITE_API_PREFIX,
   timeout: 30 * 1000
 })
 

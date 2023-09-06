@@ -25,13 +25,13 @@ export default defineConfig((mode: ConfigEnv) => {
     },
     server: {
       proxy: {
-        '/api': {
-          target: 'http://localhost:9090',
+        [env.VITE_API_PREFIX]: {
+          target: env.VITE_BASE_URL,
           changeOrigin: true,
-          rewrite: (path) => path.replace('/api', '')
+          rewrite: (path) => path.replace(env.VITE_API_PREFIX, '')
         },
         '/ws': {
-          target: 'ws://localhost:9090',
+          target: env.VITE_BASE_WS,
           changeOrigin: true,
           rewrite: (path) => path.replace('/ws', '')
         },

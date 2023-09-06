@@ -294,7 +294,7 @@ const handleSubmit = () => {
       'change_avatar'
     ).then((res: Res) => {
       if (res.code === 200) {
-        store.commit('SET_AVATAR', import.meta.env.VITE_FILE + res.data.url);
+        store.commit('SET_AVATAR', import.meta.env.VITE_API_PREFIX + res.data.url);
         dialog.value = false;
       }
     });
