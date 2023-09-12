@@ -30,5 +30,4 @@ const { data, active } = withDefaults(defineProps<{
   active: ''
 })
 const cur = computed(() => active)
-console.log('xxx', active);
 </script>

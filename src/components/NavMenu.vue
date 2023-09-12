@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu router :default-active="active" active-text-color="#A473E5" text-color="#cccccc">
+    <el-menu router :default-active="active" active-text-color="#A473E5" text-color="#888888">
       <nav-menu-child v-for="(menu, index) in data" :key="index" :data="menu" :active="active"></nav-menu-child>
     </el-menu>
   </div>

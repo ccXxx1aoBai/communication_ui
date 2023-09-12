@@ -4,6 +4,10 @@ export const getMenu = (data : any) : any => {
   return request.post('/menu/get', data)
 }
 
+export const getAllMenu = () : any => {
+  return request.post('/menu/all')
+}
+
 export const addMenu = (data : any) : any => {
   return request.post('/menu/add', data)
 }

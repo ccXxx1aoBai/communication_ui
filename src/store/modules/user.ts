@@ -70,15 +70,24 @@ export default {
       commit('SET_TOKEN', AesUtil.encrypt(data));
     },
     getRoute: (store: any) => {
+      const routes : Menus[] = []
       return new Promise((resolve, reject) => {
         getRoute({ role: store.getters.role }).then((res: Res) => {
-          resolve(res)
+          res.data.forEach((route : Menus) => {
+            route.component && routes.push(route);
+            route.children && routes.push(...route.children)
+          })
+          store.dispatch('storeRoutes', res.data)
+          resolve(routes)
         }).catch((error: Error) => {
           reject(error)
         })
       })
     },
     storeRoutes: ({ commit }: any, data: any) => {
+      data.sort((a : Menus, b : Menus) => {
+        return a.sort - b.sort
+      })
       commit('SET_ROUTES', data);
     },
   },

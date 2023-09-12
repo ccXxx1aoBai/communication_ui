@@ -17,12 +17,10 @@ let request = new Map();
 let removePending = function (config: any) {
   var key = `${config.method}:${config.url}`;
   var func = request.get(key);
-  if(requests > 0) {
-    requests--;
-  }
   if (func) {
     func();
     request.delete(key);
+    // requests--;
   }
 }
 
@@ -42,7 +40,6 @@ server.interceptors.request.use(
     if (auth) {
       config.headers.auth = AesUtil.encrypt(auth);
     }
-    console.log(config);
     if (config.url?.indexOf('upload') == -1) {
       config.data = {
         data: AesUtil.encrypt(JSON.stringify(config.data))
@@ -70,17 +67,14 @@ server.interceptors.request.use(
 server.interceptors.response.use(
   async (response) => {
     closeLoading()
-    console.log(response);
+    console.log(response.data);
     if (response.headers.token) {
       await store.dispatch('storeToken', response.headers.token);
     }
     const { status } = response;
     const data: any = JSON.parse(AesUtil.decrypt(response.data));
-    console.log(data);
     if ((data ?? '') == '') {
       errorNotification('请求出错啦')
-      loading?.close()
-      loading = null
     }
     if (data.code === 200) {
       data.msg && successNotification(data.msg);
@@ -108,7 +102,6 @@ server.interceptors.response.use(
   },
   error => {
     closeLoading()
-    loading = null
     if (error.message === 'canceled') {
       return error
     }

@@ -10,6 +10,7 @@ import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 import * as Icon from '@/components/svg'
 import './global.d.ts'
+import DropdownControll from '@/components/DropdownControll.vue'
 
 const app = createApp(App);
 for(const [key, component] of Object.entries(Icon)) {
@@ -18,6 +19,8 @@ for(const [key, component] of Object.entries(Icon)) {
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
 }
+
+app.component('DropdownControll', DropdownControll)
 
 app
   .use(store)

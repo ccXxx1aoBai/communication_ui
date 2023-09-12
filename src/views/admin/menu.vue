@@ -219,7 +219,7 @@ let form = reactive<Menus>({
   name: '',
   label: '',
   path: '',
-  icon: '',
+  icon: 'Home',
   component: '',
   sort: 0,
   parent: '',
